@@ -1,15 +1,12 @@
 package com.example.hongpak_springboot.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-@Entity //엔티티 선언
+@Entity //엔티티 선언(이 클래스를 SQL로 DB에 테이블을 만들겠다)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -17,7 +14,7 @@ import lombok.ToString;
 public class Article {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //strategy = GenerationType.IDENTITY : DB가 알아서 id생성(더미데이터 아이디 중복문제)
     private Long id;
     @Column
     private String title;
