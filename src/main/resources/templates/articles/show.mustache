@@ -18,5 +18,8 @@
     </tbody>
 </table>
 <a href="/articles/{{article.id}}/edit" class="btn btn-primary">edit</a>
+<!-- POST, GET, UPDATE, DELETE -->
+<!-- HTML에선 POST, GET만 사용하므로 GET, a태그 사용. 추후 js로 DELETE보내기 -->
+<a href="/articles/{{article.id}}/delete" class="btn btn-danger">delete</a>
 <a href="/articles">back</a>
 {{>layouts/footer}}
