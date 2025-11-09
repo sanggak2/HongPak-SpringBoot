@@ -67,6 +67,10 @@ public class ArticleService {
         return temp;
     }
 
+    /**
+     *
+     * 트랜잭션화 테스트
+     */
     @Transactional  // 해당 메서드를 트랜잭션화 (실패하면 메서드 실행 전 상태로 롤백)
     public List<Article> createArticles(List<ArticleForm> dtos) {
         // 1. dto를 entity로
