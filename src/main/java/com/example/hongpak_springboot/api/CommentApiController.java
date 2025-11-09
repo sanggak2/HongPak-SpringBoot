@@ -19,7 +19,7 @@ public class CommentApiController {
     @GetMapping("/api/articles/{article_id}/comments")
     public ResponseEntity<List<CommentDto>> comments(@PathVariable long article_id) {
         // 1. 서비스에게 위임
-        List<CommentDto> dtos = commentService.index(article_id);
+        List<CommentDto> dtos = commentService.show(article_id);
         // 결과 응답
         return ResponseEntity.status(HttpStatus.OK).body(dtos);
     }

@@ -1,0 +1,60 @@
+<div class="card m-2" id="comments-new">
+    <div class="card-body">
+        <!-- 댓글 작성 폼 -->
+        <form>
+            <div class="mb-3">
+                <label class="form-label">닉네임</label>
+                <input class="form-control" id="new-comment-nickname">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">내용</label>
+                </label><textarea class="form-control form-control-sm" rows="3" id="new-comment-body"></textarea>
+            </div>
+
+            <!-- 히든 인풋 -->
+            {{#article}}
+                <input type="hidden" id="new-comment-article-id" value="{{id}}">
+            {{/article}}
+
+
+            <button type="button" class="btn btn-primary" id="comment-create-btn">작성</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    {
+        // 댓글 생성버튼 변수화
+        const commentCreateBtn = document.querySelector("#comment-create-btn");
+
+        // 버튼 클릭감지
+        commentCreateBtn.addEventListener("click", function () {
+            // 새 댓글 객체 생성
+            const comment = {
+                nickname:document.querySelector("#new-comment-nickname").value,
+                body:document.querySelector("#new-comment-body").value,
+                article_id:document.querySelector("#new-comment-article-id").value
+            };
+
+            // 댓글 객체 출력
+            console.log(comment)
+
+            // fetch() : Talend API요청을 javaScript로 보낸다.
+            const url = "/api/articles/" + comment.article_id + "/comments"
+            fetch(url, {
+                method:"post", // Post로
+                body: JSON.stringify(comment),   // comment객체를 JSON형식으로 변환해서 보냄
+                headers: {
+                    "Content-Type":"application/json"
+                }
+            }).then(response=>{
+                // http 응답코드 메시지출력
+                const msg = (response.ok) ? "댓글이 등록되었습니다.":"댓글 등록 실패.";
+                alert(msg);
+
+                // 현 페이지 새로고침
+                window.location.reload();
+            });
+        })
+    }
+</script>

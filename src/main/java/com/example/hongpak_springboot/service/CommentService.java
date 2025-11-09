@@ -25,7 +25,7 @@ public class CommentService {
     private ArticleRepository articleRepository;
 
 
-    public List<CommentDto> index(long articleId) {
+    public List<CommentDto> show(long articleId) {
         // 1. 댓글 조회
 //        List<Comment> comments = commentRepository.findByArticleId(articleId);
 //

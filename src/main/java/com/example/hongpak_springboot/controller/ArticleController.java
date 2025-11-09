@@ -1,8 +1,10 @@
 package com.example.hongpak_springboot.controller;
 
 import com.example.hongpak_springboot.dto.ArticleForm;
+import com.example.hongpak_springboot.dto.CommentDto;
 import com.example.hongpak_springboot.entity.Article;
 import com.example.hongpak_springboot.repository.ArticleRepository;
+import com.example.hongpak_springboot.service.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,8 @@ public class ArticleController {
 
     @Autowired  // springboot에서 싱글턴으로 구현한 객체에 연결
     private ArticleRepository articleRepository;
+    @Autowired
+    private CommentService commentService;
 
     @GetMapping("/articles/new")
     public String newArticleForm(){
@@ -49,9 +53,11 @@ public class ArticleController {
 
         // 1. id로 데이터를 가져옴  Controller
         Article entity = articleRepository.findById(id).orElse(null);
+        List<CommentDto> commentDtos = commentService.show(id);
 
         // 2. 가져온 데이터를 모델에 등록   Model
         model.addAttribute("article", entity);
+        model.addAttribute("commentDtos", commentDtos);
 
         // 3. 보여줄 페이지 설정    View
         return "articles/show";
