@@ -5,6 +5,7 @@ import com.example.hongpak_springboot.entity.Article;
 import com.example.hongpak_springboot.entity.Comment;
 import com.example.hongpak_springboot.repository.ArticleRepository;
 import com.example.hongpak_springboot.repository.CommentRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class CommentService {
     @Autowired
@@ -44,6 +46,8 @@ public class CommentService {
 
     @Transactional
     public CommentDto create(long articleId, CommentDto dto) {
+        log.info("입력값 => {}", articleId);
+        log.info("입력값 => {}", dto);
         // 1. 게시글 조회 및 예외발생
         Article article = articleRepository.findById(articleId).orElseThrow(
                 ()->new IllegalArgumentException("댓글 생성실패. 대상 게시글이 없습니다."));

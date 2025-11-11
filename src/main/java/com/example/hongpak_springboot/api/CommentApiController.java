@@ -1,5 +1,6 @@
 package com.example.hongpak_springboot.api;
 
+import com.example.hongpak_springboot.annotation.RunningTime;
 import com.example.hongpak_springboot.dto.CommentDto;
 import com.example.hongpak_springboot.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class CommentApiController {
     }
 
     // 댓글 삭제
+    @RunningTime
     @DeleteMapping("/api/comments/{id}")
     public ResponseEntity<CommentDto> delete(@PathVariable long id) {
         // 1. 서비스에게 위임
