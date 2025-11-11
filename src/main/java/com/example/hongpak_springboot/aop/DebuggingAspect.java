@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 @Component  // IOC에 객체 등록
 @Slf4j
 public class DebuggingAspect {
-    // 주입대상 지정 : CommentService#create()
-    @Pointcut("execution(* com.example.hongpak_springboot.service.CommentService.*(..))")
+    // 주입대상 지정 : api에 있는 모든 컨트롤러 메소드
+    @Pointcut("execution(* com.example.hongpak_springboot.api.*.*(..))")
     private void cut() {}
 
     // 실행 시점 설정 : cut이 수행되기 전에 수행되는 함수
